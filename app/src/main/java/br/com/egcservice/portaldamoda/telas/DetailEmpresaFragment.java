@@ -107,7 +107,6 @@ public class DetailEmpresaFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail_empresa, container, false);
-
         lblEmp = (TextView) view.findViewById(R.id.lblDescricaoEmp);
         lblEnd = (TextView) view.findViewById(R.id.lblEndDetailEmp);
         lblTel = (TextView) view.findViewById(R.id.lblTelDetailEmp);
