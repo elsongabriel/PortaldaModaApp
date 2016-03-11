@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".telas.DetailEmpresaActivity">
+
+    <item
+        android:id="@+id/action_favorito"
+        android:icon="@mipmap/ic_action_fav"
+        android:orderInCategory="100"
+        android:title="Favoritar"
+        app:showAsAction="always" />
+
+</menu>

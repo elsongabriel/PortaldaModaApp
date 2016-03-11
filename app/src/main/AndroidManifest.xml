@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.egcservice.portaldamoda">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CidadeActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".CidadeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CidadeActivity" />
+        </activity>
+        <activity
+            android:name=".telas.ListaEmpresasActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity
+            android:name=".telas.DetailEmpresaActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".telas.ListaEmpresasActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".telas.ListaEmpresasActivity" />
+        </activity>
+        <activity
+            android:name=".telas.loja.ListaCategoriasActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity
+            android:name=".telas.loja.ListaLojasActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".telas.loja.ListaCategoriasActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".telas.loja.ListaCategoriasActivity" />
+        </activity>
+        <activity
+            android:name=".telas.loja.DetailLojaActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".telas.loja.ListaLojasActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".telas.loja.ListaLojasActivity" />
+        </activity>
+        <activity
+            android:name=".telas.FavoritosActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".telas.ListaEmpresasActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".telas.ListaEmpresasActivity" />
+        </activity>
+        <activity
+            android:name=".telas.excursao.DetailExcursaoActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".telas.ListaEmpresasActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".telas.ListaEmpresasActivity" />
+        </activity>
+    </application>
+</manifest>
