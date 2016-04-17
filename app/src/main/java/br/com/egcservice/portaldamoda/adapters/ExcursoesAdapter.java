@@ -16,7 +16,7 @@ public class ExcursoesAdapter extends ArrayAdapter<Excursao> {
 
     private Excursao mExcursao;
     private TextView mLblOrigem, mLblDestino;
-//teste
+
     public ExcursoesAdapter(Context ctx, List<Excursao> excursoes) {
         super(ctx, 0, excursoes);
     }
