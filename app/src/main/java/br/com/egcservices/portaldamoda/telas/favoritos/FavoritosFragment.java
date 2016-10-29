@@ -1,4 +1,4 @@
-package br.com.egcservices.portaldamoda.telas;
+package br.com.egcservices.portaldamoda.telas.favoritos;
 
 
 import android.content.Intent;
@@ -16,9 +16,9 @@ import java.util.List;
 import br.com.egcservices.portaldamoda.R;
 import br.com.egcservices.portaldamoda.adapters.FavoritoAdapter;
 import br.com.egcservices.portaldamoda.classes.Empresa;
-import br.com.egcservices.portaldamoda.utils.ClickFavListener;
+import br.com.egcservices.portaldamoda.utils.listeners.ClickFavListener;
 import br.com.egcservices.portaldamoda.utils.ConexaoHttp;
-import br.com.egcservices.portaldamoda.utils.EmpresaDB;
+import br.com.egcservices.portaldamoda.utils.db.EmpresaDB;
 
 public class FavoritosFragment extends ListFragment {
 

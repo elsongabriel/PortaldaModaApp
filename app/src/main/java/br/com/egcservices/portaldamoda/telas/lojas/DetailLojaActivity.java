@@ -1,4 +1,4 @@
-package br.com.egcservices.portaldamoda.telas.loja;
+package br.com.egcservices.portaldamoda.telas.lojas;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;

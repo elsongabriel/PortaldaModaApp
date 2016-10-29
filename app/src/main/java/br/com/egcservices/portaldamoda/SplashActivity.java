@@ -13,7 +13,7 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                startActivity(new Intent(SplashActivity.this, br.com.egcservices.portaldamoda.CidadeActivity.class));
+                startActivity(new Intent(SplashActivity.this, CidadeActivity.class));
                 finish();
             }
         }, 2000);

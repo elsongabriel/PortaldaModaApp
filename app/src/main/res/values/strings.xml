@@ -1,8 +1,25 @@
 <resources>
     <string name="app_name">Portal da Moda App</string>
-    <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_infocidade">Selecione uma cidade que deseja realizar consultas.</string>
+    <string name="str_caruaru">Caruaru</string>
+    <string name="str_santac">Santa Cruz</string>
+    <string name="str_toritama">Toritama</string>
+
+    <string name="str_favoritos">Favoritos</string>
+    <string name="str_meus_favs">Meus Favoritos</string>
+    <string name="str_alimentacao">Alimentação</string>
+    <string name="str_excursoes">Excursões</string>
+    <string name="str_hoteis">Hoteis</string>
+    <string name="str_lojas">Lojas</string>
+
+    <string name="btn_ligar">Ligar</string>
+
+
+    <string name="hint_search">Procurar</string>
+    <string name="hint_fav">Favoritar</string>
+    <string name="hint_desfav">Desfavoritar</string>
+
+    <string name="str_naoencontrado">Não encontramos o que você procura!</string>
 
 </resources>

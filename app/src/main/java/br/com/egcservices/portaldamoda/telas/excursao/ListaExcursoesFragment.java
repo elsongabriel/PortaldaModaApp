@@ -17,7 +17,7 @@ import java.util.List;
 import br.com.egcservices.portaldamoda.R;
 import br.com.egcservices.portaldamoda.adapters.ExcursoesAdapter;
 import br.com.egcservices.portaldamoda.classes.Excursao;
-import br.com.egcservices.portaldamoda.utils.ClickListener;
+import br.com.egcservices.portaldamoda.utils.listeners.ClickListener;
 import br.com.egcservices.portaldamoda.utils.ConexaoHttp;
 
 public class ListaExcursoesFragment extends ListFragment {
@@ -32,6 +32,7 @@ public class ListaExcursoesFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         Intent it = getActivity().getIntent();
         if (it.hasExtra("cidade") && it.hasExtra("tipoempresa") && it.hasExtra("descempresa")) {
             cidadeId = it.getStringExtra("cidade");

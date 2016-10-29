@@ -7,10 +7,12 @@ import android.support.v7.app.ActionBarActivity;
 import br.com.egcservices.portaldamoda.R;
 import br.com.egcservices.portaldamoda.classes.Empresa;
 import br.com.egcservices.portaldamoda.classes.Excursao;
+import br.com.egcservices.portaldamoda.telas.aliment_hoteis.ListaAlimHotFragment;
 import br.com.egcservices.portaldamoda.telas.excursao.DetailExcursaoActivity;
 import br.com.egcservices.portaldamoda.telas.excursao.ListaExcursoesFragment;
-import br.com.egcservices.portaldamoda.telas.loja.ListaCategoriasActivity;
-import br.com.egcservices.portaldamoda.utils.ClickListener;
+import br.com.egcservices.portaldamoda.telas.favoritos.FavoritosActivity;
+import br.com.egcservices.portaldamoda.telas.lojas.categorias.ListaCategoriasActivity;
+import br.com.egcservices.portaldamoda.utils.listeners.ClickListener;
 
 public class ListaEmpresasActivity extends ActionBarActivity implements ClickListener {
 
@@ -22,19 +24,19 @@ public class ListaEmpresasActivity extends ActionBarActivity implements ClickLis
         setContentView(R.layout.activity_lista_empresas);
         validarIntent();
         if (tipoEmpresa.equals("0")) {
-            Intent it = new Intent(this, br.com.egcservices.portaldamoda.telas.FavoritosActivity.class);
+            Intent it = new Intent(this, FavoritosActivity.class);
             it.putExtra("cidade", cidadeId);
             startActivity(it);//favoritos
         }
         if (tipoEmpresa.equals("1"))
             getSupportFragmentManager().beginTransaction()
-                    .replace(android.R.id.content, new br.com.egcservices.portaldamoda.telas.ListaAlimHotFragment()).commit();//alimentação
+                    .replace(android.R.id.content, new ListaAlimHotFragment()).commit();//alimentação
         else if (tipoEmpresa.equals("2"))
             getSupportFragmentManager().beginTransaction()
                     .replace(android.R.id.content, new ListaExcursoesFragment()).commit();//excursão
         else if (tipoEmpresa.equals("3"))
             getSupportFragmentManager().beginTransaction()
-                    .replace(android.R.id.content, new br.com.egcservices.portaldamoda.telas.ListaAlimHotFragment()).commit();//hotel
+                    .replace(android.R.id.content, new ListaAlimHotFragment()).commit();//hotel
         else if (tipoEmpresa.equals("4")) {
             Intent it = new Intent(this, ListaCategoriasActivity.class);
             it.putExtra("cidade", cidadeId);
@@ -57,7 +59,7 @@ public class ListaEmpresasActivity extends ActionBarActivity implements ClickLis
     @Override
     public void empresaClick(Empresa empresa) {
         validarIntent();
-        Intent it2 = new Intent(this, br.com.egcservices.portaldamoda.telas.DetailEmpresaActivity.class);
+        Intent it2 = new Intent(this, DetailEmpresaActivity.class);
         it2.putExtra("empresa", empresa);
         startActivity(it2);
     }

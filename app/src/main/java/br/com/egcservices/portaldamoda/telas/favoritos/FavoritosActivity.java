@@ -1,4 +1,4 @@
-package br.com.egcservices.portaldamoda.telas;
+package br.com.egcservices.portaldamoda.telas.favoritos;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 
 import br.com.egcservices.portaldamoda.R;
 import br.com.egcservices.portaldamoda.classes.Empresa;
-import br.com.egcservices.portaldamoda.utils.ClickFavListener;
+import br.com.egcservices.portaldamoda.utils.listeners.ClickFavListener;
 
 public class FavoritosActivity extends ActionBarActivity implements ClickFavListener {
 

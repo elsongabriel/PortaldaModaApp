@@ -1,4 +1,4 @@
-package br.com.egcservices.portaldamoda.utils;
+package br.com.egcservices.portaldamoda.utils.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.egcservices.portaldamoda.classes.Empresa;
-import br.com.egcservices.portaldamoda.utils.PersistenceHelper;
 
 public class EmpresaDB {
 
@@ -28,7 +27,7 @@ public class EmpresaDB {
     }
 
     //DADOS DA TABELA_EMPRESA
-    public static final String TABELA_FAVORITO = "TabelaEmpresasFavoritos";
+//    public static final String TABELA_FAVORITO = "TabelaEmpresasFavoritos";
 //    public static final String COLUNA_ID = "Id";
 //    public static final String COLUNA_EMP_ID = "EmpId";
 //    public static final String COLUNA_EMP_CIDADE = "CidadeId";
@@ -49,15 +48,15 @@ public class EmpresaDB {
     public void inserirFavorito(Empresa empresa) {
         dataBase = mHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("EmpId", empresa.getId());
-        values.put("CidadeId", empresa.getCidade_empresa_id());
-        dataBase.insert(TABELA_FAVORITO, null, values);
+        values.put(EmpresaTB.COL_EMP_ID, empresa.getId());
+        values.put(EmpresaTB.COL_CID_ID, empresa.getCidade_empresa_id());
+        dataBase.insert(EmpresaTB.TABLE_NAME, null, values);
         dataBase.close();
     }
 
     public void excluirFavorito(Empresa empresa) {
         dataBase = mHelper.getWritableDatabase();
-        dataBase.delete(TABELA_FAVORITO, "EmpId = ?",
+        dataBase.delete(EmpresaTB.TABLE_NAME, EmpresaTB.COL_EMP_ID + " = ?",
                 new String[]{empresa.getId().toString()});
         dataBase.close();
     }
@@ -65,7 +64,7 @@ public class EmpresaDB {
     public List<Integer> listarFavoritoPorCidade(Integer cid) {
         dataBase = mHelper.getReadableDatabase();
         Cursor cursor = dataBase.rawQuery(
-                "SELECT EmpId FROM TabelaEmpresasFavoritos WHERE CidadeId = ?",
+                "SELECT " + EmpresaTB.COL_EMP_ID + " FROM " + EmpresaTB.TABLE_NAME + " WHERE " + EmpresaTB.COL_CID_ID + " = ?",
                 new String[]{String.valueOf(cid)}
         );
         List<Integer> empresasIds = new ArrayList<>();
@@ -75,7 +74,7 @@ public class EmpresaDB {
             if (cursor.moveToFirst()) {
                 do {
                     //int indexID = cursor.getColumnIndex(COLUNA_ID);
-                    int indexEmpresaId = cursor.getColumnIndex("EmpId");
+                    int indexEmpresaId = cursor.getColumnIndex(EmpresaTB.COL_EMP_ID);
                     //int indexCidadeId = cursor.getColumnIndex("CidadeId");
                     //String id = cursor.getString(indexID);
                     Integer empid = Integer.valueOf(cursor.getString(indexEmpresaId));
@@ -92,8 +91,8 @@ public class EmpresaDB {
 
     public boolean favorito(Empresa empresa) {
         dataBase = mHelper.getReadableDatabase();
-        String query = "SELECT * FROM TabelaEmpresasFavoritos WHERE EmpId =" + empresa.getId()
-                + " AND CidadeId = " + empresa.getCidade_empresa_id();
+        String query = "SELECT * FROM " + EmpresaTB.TABLE_NAME + " WHERE " + EmpresaTB.COL_EMP_ID + " = " + empresa.getId()
+                + " AND " + EmpresaTB.COL_CID_ID + " = " + empresa.getCidade_empresa_id();
         Cursor cursor = dataBase.rawQuery(query, null);
         int count = cursor.getCount();
         cursor.close();

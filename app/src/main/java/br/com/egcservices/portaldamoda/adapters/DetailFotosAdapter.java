@@ -31,7 +31,7 @@ public class DetailFotosAdapter extends ArrayAdapter<FotoEmpresa> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         mFotoEmpresa = getItem(position);
-        String diretorio = "http://egcservice.com/webservices/portaldamoda/fotos/";
+        String diretorio = "http://egcservices.com.br/webservices/portaldamoda/fotos/";
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(
@@ -48,7 +48,7 @@ public class DetailFotosAdapter extends ArrayAdapter<FotoEmpresa> {
         mLblNomeProd.setText(mFotoEmpresa.getNome_produto());
         mLblValorProd.setText("R$ " + String.valueOf(mFotoEmpresa.getValor_produto()));
         mLblDescProduto.setText(mFotoEmpresa.getDesc_produto());
-        if (mFotoEmpresa.getCaminho_img().equals("")) {
+        if (mFotoEmpresa.getCaminho_img().trim().equals("")) {
             Picasso.with(parent.getContext()).load(diretorio + "sem_foto.jpg").into(imgFotoDetail);
         } else {
             Picasso.with(parent.getContext()).load(diretorio + mFotoEmpresa.getCaminho_img()).into(imgFotoDetail);

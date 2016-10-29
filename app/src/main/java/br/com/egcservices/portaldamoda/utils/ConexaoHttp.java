@@ -47,7 +47,7 @@ public class ConexaoHttp {
         return conexao;
     }
 
-    public static boolean temConexao(Context ctx) {
+    public boolean temConexao(Context ctx) {
         ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
         return (info != null && info.isConnected());

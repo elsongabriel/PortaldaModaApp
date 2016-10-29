@@ -36,35 +36,35 @@ public class HomeActivity extends ActionBarActivity {
         mBtnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirTela(cidadeId, "0", "Favoritos");
+                abrirTela(cidadeId, "0", getString(R.string.str_favoritos));
             }
         });
 
         mBtnAliment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirTela(cidadeId, "1", "Alimentação");
+                abrirTela(cidadeId, "1", getString(R.string.str_alimentacao));
             }
         });
 
         mBtnExcurs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirTela(cidadeId, "2", "Excursões");
+                abrirTela(cidadeId, "2", getString(R.string.str_excursoes));
             }
         });
 
         mBtnHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirTela(cidadeId, "3", "Hoteis");
+                abrirTela(cidadeId, "3", getString(R.string.str_hoteis));
             }
         });
 
         mBtnLoja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirTela(cidadeId, "4", "Lojas");
+                abrirTela(cidadeId, "4", getString(R.string.str_lojas));
             }
         });
     }

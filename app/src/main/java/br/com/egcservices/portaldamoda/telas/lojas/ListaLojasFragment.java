@@ -1,16 +1,17 @@
-package br.com.egcservices.portaldamoda.telas.loja;
+package br.com.egcservices.portaldamoda.telas.lojas;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,18 +22,21 @@ import br.com.egcservices.portaldamoda.R;
 import br.com.egcservices.portaldamoda.adapters.EmpresasAdapter;
 import br.com.egcservices.portaldamoda.classes.CategoriaLoja;
 import br.com.egcservices.portaldamoda.classes.Empresa;
-import br.com.egcservices.portaldamoda.utils.ClickListener;
-import br.com.egcservices.portaldamoda.utils.ClickLojaListener;
+import br.com.egcservices.portaldamoda.utils.listeners.ClickLojaListener;
 import br.com.egcservices.portaldamoda.utils.ConexaoHttp;
+import br.com.egcservices.portaldamoda.utils.Mensagem;
 
-public class ListaLojasFragment extends ListFragment {
-    AutoCompleteTextView actLojas;
+public class ListaLojasFragment extends ListFragment implements SearchView.OnQueryTextListener {
+
     TextView lblTipoEmp;
     ConexaoHttp conexaoHttp = new ConexaoHttp();
     ProgressDialog pDialog;
+    MenuItem mMenuItemSearch;
+    SearchView mSearchView;
 
     private static String cidadeId, tipoEmpresa, descEmpresa;
     private static List<Empresa> mListaLojas = new ArrayList<>();
+    private static List<Empresa> mListaQuery = new ArrayList<>();
     private static CategoriaLoja mCat;
 
     public ListaLojasFragment(CategoriaLoja cat, String cid, String tipo, String desc) {
@@ -45,6 +49,7 @@ public class ListaLojasFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 //        Intent it = getActivity().getIntent();
 //        if (it.hasExtra("cidade") && it.hasExtra("tipoempresa") && it.hasExtra("descempresa")) {
 //            cidadeId = it.getStringExtra("cidade");
@@ -58,22 +63,55 @@ public class ListaLojasFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lista_lojas, container, false);
-
-        actLojas = (AutoCompleteTextView) view.findViewById(R.id.actLojas);
         lblTipoEmp = (TextView) view.findViewById(R.id.lblTipoEmpLoja);
         lblTipoEmp.setText(descEmpresa);
-        actLojas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @SuppressLint("LongLogTag")
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String nomeEmpresa = parent.getItemAtPosition(position).toString();
-                if (getActivity() instanceof ClickLojaListener) {
-                    ((ClickLojaListener) getActivity())
-                            .lojaClick(validarClick(true, cidadeId, tipoEmpresa, nomeEmpresa, mListaLojas));
+        return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+
+        mMenuItemSearch = menu.findItem(R.id.action_search);
+        mSearchView = (SearchView) MenuItemCompat.getActionView(mMenuItemSearch);
+        mSearchView.setOnQueryTextListener(this);
+    }
+
+    // ---- OnQueryTextListener
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        mListaQuery = new ArrayList<>();
+        if (query.trim() != "") {
+            for (int i = 0; i < mListaLojas.size(); i++) {
+                Empresa emp = mListaLojas.get(i);
+                if (emp.getNome_empresa().toLowerCase().contains(query.toLowerCase())) {
+                    mListaQuery.add(emp);
                 }
             }
-        });
-        return view;
+
+            if (mListaQuery.size() > 0) {
+                refreshList(mListaQuery);
+            } else {
+                Mensagem.exibir(getActivity(), getString(R.string.str_naoencontrado));
+            }
+        } else {
+            refreshList(mListaLojas);
+            mSearchView.clearFocus();
+            return false;
+        }
+
+        mSearchView.clearFocus();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        if (query.trim().equals("")) {
+            refreshList(mListaLojas);
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -115,35 +153,13 @@ public class ListaLojasFragment extends ListFragment {
         protected void onPostExecute(List<Empresa> result) {
             super.onPostExecute(result);
             if (result != null) {
-                refreshList();
+                refreshList(mListaLojas);
             }
             pDialog.dismiss();
         }
     }
 
-    public void refreshList() {
-        List<String> emps = new ArrayList<>();
-        setListAdapter(new EmpresasAdapter(getActivity(), mListaLojas));
-
-        //atualizar autocompletetextview
-        for (int i = 0; i < mListaLojas.size(); i++) {
-            emps.add(mListaLojas.get(i).getNome_empresa());
-        }
-        actLojas.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, emps));
-    }
-
-    public Empresa validarClick(boolean flag, String cid, String tipo, String nome, List<Empresa> lista) {
-        Empresa mEmpresaResult;
-        if (flag) {
-            for (int i = 0; i < lista.size(); i++) {
-                mEmpresaResult = lista.get(i);
-                if (mEmpresaResult.getCidade_empresa_id().equals(Integer.valueOf(cid))
-                        && mEmpresaResult.getTipo_empresa_id().equals(Integer.valueOf(tipo))
-                        && mEmpresaResult.getNome_empresa().equals(nome)) {
-                    return mEmpresaResult;
-                }
-            }
-        }
-        return null;
+    public void refreshList(List<Empresa> lista) {
+        setListAdapter(new EmpresasAdapter(getActivity(), lista));
     }
 }

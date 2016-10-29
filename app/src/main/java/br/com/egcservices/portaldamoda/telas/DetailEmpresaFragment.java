@@ -22,10 +22,10 @@ import br.com.egcservices.portaldamoda.R;
 import br.com.egcservices.portaldamoda.adapters.DetailFotosAdapter;
 import br.com.egcservices.portaldamoda.classes.Empresa;
 import br.com.egcservices.portaldamoda.classes.FotoEmpresa;
-import br.com.egcservices.portaldamoda.utils.ClickFavListener;
+import br.com.egcservices.portaldamoda.utils.listeners.ClickFavListener;
 import br.com.egcservices.portaldamoda.utils.ConexaoHttp;
-import br.com.egcservices.portaldamoda.utils.EmpresaDB;
 import br.com.egcservices.portaldamoda.utils.Mensagem;
+import br.com.egcservices.portaldamoda.utils.db.EmpresaDB;
 
 public class DetailEmpresaFragment extends ListFragment {
 
@@ -36,7 +36,7 @@ public class DetailEmpresaFragment extends ListFragment {
 
     ConexaoHttp conexaoHttp = new ConexaoHttp();
     public Empresa mEmpresa;
-    private static List<FotoEmpresa> mListaFotosEmpresa = new ArrayList<>();
+    private List<FotoEmpresa> mListaFotosEmpresa = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class DetailEmpresaFragment extends ListFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_detail_empresa, menu);
+        inflater.inflate(R.menu.menu_favorito, menu);
         mMenuItemFavorito = menu.findItem(R.id.action_favorito);
         mudarMenuFavorito();
     }
@@ -74,7 +74,7 @@ public class DetailEmpresaFragment extends ListFragment {
         EmpresaDB empDB = new EmpresaDB(getActivity());
         boolean favorito = empDB.favorito(mEmpresa);
         if (favorito) {
-            mMenuItemFavorito.setTitle("Remover dos Favoritos");
+            mMenuItemFavorito.setTitle("Remover dos Favoritos"); //getString(R.string.str_favoritos)
             mMenuItemFavorito.setIcon(android.R.drawable.ic_menu_close_clear_cancel);
         } else {
             mMenuItemFavorito.setTitle("Adicionar aos Favoritos");

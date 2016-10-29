@@ -6,8 +6,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 
-import br.com.egcservices.portaldamoda.HomeActivity;
-
 public class CidadeActivity extends ActionBarActivity {
 
     Button mBtnCaruaru, mBtnSanta, mBtnToritama;
@@ -24,21 +22,21 @@ public class CidadeActivity extends ActionBarActivity {
         mBtnCaruaru.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirTela("1", "Caruaru");
+                abrirTela("1", getString(R.string.str_caruaru));
             }
         });
 
         mBtnSanta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirTela("2", "Santa Cruz");
+                abrirTela("2", getString(R.string.str_santac));
             }
         });
 
         mBtnToritama.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirTela("3", "Toritama");
+                abrirTela("3", getString(R.string.str_toritama));
             }
         });
     }

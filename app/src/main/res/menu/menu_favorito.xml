@@ -7,7 +7,7 @@
         android:id="@+id/action_favorito"
         android:icon="@mipmap/ic_action_fav"
         android:orderInCategory="100"
-        android:title="Favoritar"
+        android:title="@string/hint_fav"
         app:showAsAction="always" />
 
 </menu>

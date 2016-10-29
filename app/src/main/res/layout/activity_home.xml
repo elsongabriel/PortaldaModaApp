@@ -31,7 +31,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="130dp"
-            android:text="Favoritos" />
+            android:text="@string/str_favoritos" />
 
         <Button
             android:id="@+id/btnAliment"
@@ -40,7 +40,7 @@
             android:layout_below="@+id/btnFavoritos"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="Alimentação" />
+            android:text="@string/str_alimentacao" />
 
         <Button
             android:id="@+id/btnExcursao"
@@ -50,7 +50,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="Excursões" />
+            android:text="@string/str_excursoes" />
 
         <Button
             android:id="@+id/btnHotel"
@@ -60,7 +60,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="Hoteis" />
+            android:text="@string/str_hoteis" />
 
         <Button
             android:id="@+id/btnLoja"
@@ -70,7 +70,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="Lojas" />
+            android:text="@string/str_lojas" />
 
     </LinearLayout>
 </ScrollView>
