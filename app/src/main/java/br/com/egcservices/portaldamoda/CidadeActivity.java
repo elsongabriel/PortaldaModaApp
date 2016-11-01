@@ -1,44 +1,28 @@
 package br.com.egcservices.portaldamoda;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.widget.Button;
 
-public class CidadeActivity extends ActionBarActivity {
-
-    Button mBtnCaruaru, mBtnSanta, mBtnToritama;
+public class CidadeActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cidade);
+    }
 
-        mBtnCaruaru = (Button) findViewById(R.id.btnCaruaru);
-        mBtnSanta = (Button) findViewById(R.id.btnSantaC);
-        mBtnToritama = (Button) findViewById(R.id.btnToritama);
+    public void caruaru(View v) {
+        abrirTela("1", getString(R.string.str_caruaru));
+    }
 
-        mBtnCaruaru.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abrirTela("1", getString(R.string.str_caruaru));
-            }
-        });
+    public void santacruz(View v) {
+        abrirTela("2", getString(R.string.str_santac));
+    }
 
-        mBtnSanta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abrirTela("2", getString(R.string.str_santac));
-            }
-        });
-
-        mBtnToritama.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abrirTela("3", getString(R.string.str_toritama));
-            }
-        });
+    public void toritama(View v) {
+        abrirTela("3", getString(R.string.str_toritama));
     }
 
     public void abrirTela(String value, String value2) {

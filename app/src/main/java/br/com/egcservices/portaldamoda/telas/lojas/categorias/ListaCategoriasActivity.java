@@ -39,7 +39,7 @@ public class ListaCategoriasActivity extends ActionBarActivity implements ClickL
         it2.putExtra("cidade", cidadeId);
         it2.putExtra("tipoempresa", tipoEmpresa);
         it2.putExtra("descempresa", descEmpresa);
-        it2.putExtra("categoria", cat);
+        it2.putExtra("categoria", cat.getId().toString());
         startActivity(it2);
     }
 

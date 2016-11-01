@@ -6,11 +6,10 @@ import android.support.v7.app.ActionBarActivity;
 
 import br.com.egcservices.portaldamoda.R;
 import br.com.egcservices.portaldamoda.classes.Empresa;
+import br.com.egcservices.portaldamoda.telas.DetailEmpresaActivity;
 import br.com.egcservices.portaldamoda.utils.listeners.ClickFavListener;
 
 public class FavoritosActivity extends ActionBarActivity implements ClickFavListener {
-
-//    private static String cidadeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class FavoritosActivity extends ActionBarActivity implements ClickFavList
 
     @Override
     public void clickFav(Empresa empresa, boolean favorito) {
-        Intent it2 = new Intent(this, br.com.egcservices.portaldamoda.telas.DetailEmpresaActivity.class);
+        Intent it2 = new Intent(this, DetailEmpresaActivity.class);
         it2.putExtra("empresa", empresa);
         startActivity(it2);
     }

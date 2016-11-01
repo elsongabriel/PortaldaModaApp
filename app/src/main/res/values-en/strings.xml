@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Portal Fashion</string>
+
+    <string name="str_infocidade">Select a city you want to perform queries.</string>
+    <string name="str_caruaru">Caruaru</string>
+    <string name="str_santac">Santa Cruz</string>
+    <string name="str_toritama">Toritama</string>
+
+    <string name="str_favoritos">Favorites</string>
+    <string name="str_meus_favs">My Favoritos</string>
+    <string name="str_alimentacao">Feeding</string>
+    <string name="str_excursoes">Travels</string>
+    <string name="str_hoteis">Hotels</string>
+    <string name="str_lojas">Stores</string>
+
+    <string name="btn_ligar">Call</string>
+
+    <string name="hint_search">Search</string>
+    <string name="hint_fav">Add to Favorites</string>
+    <string name="hint_desfav">Remove from Favorites</string>
+
+    <string name="str_naoencontrado">We not found what you are looking for!</string>
+    <string name="str_carregando">Loading...</string>
+
+    <string name="str_exc_saida">Leave:&#160;</string>
+    <string name="str_exc_origem">Origin:&#160;</string>
+    <string name="str_exc_destino">Destiny:&#160;</string>
+    <string name="str_exc_datahora">Date and Time:&#160;</string>
+    <string name="str_exc_respons">Responsible:&#160;</string>
+    <string name="str_exc_telrespons">Phone Responsible:&#160;</string>
+    <string name="str_exc_valor">Price: R$</string>
+    <string name="str_exc_formapgto">Payment methods: </string>
+
+    <string name="str_fav_add">Add to Favorites</string>
+    <string name="str_fav_del">Remove from Favorites</string>
+
+    <string name="str_fav_adicionado">Added to Favorites</string>
+    <string name="str_fav_removido">Removed from Favorites</string>
+
+</resources>

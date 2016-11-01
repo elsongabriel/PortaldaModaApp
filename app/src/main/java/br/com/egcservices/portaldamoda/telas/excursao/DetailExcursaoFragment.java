@@ -55,13 +55,13 @@ public class DetailExcursaoFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        lblOrigem.setText("Saída: " + mExcursao.getOrigem());
-        lblDestino.setText("Destino: " + mExcursao.getDestino());
-        lblDataHora.setText("Data e Hora: " + mExcursao.getData_hora());
-        lblResponsavel.setText("Responsável: " + mExcursao.getResponsavel());
-        lblTelResp.setText("Tel. Responsável: " + mExcursao.getTelefone_responsavel());
-        lblValor.setText("Valor: R$" + mExcursao.getValor());
-        lblForma.setText("Forma de pagamento: " + mExcursao.getForma_pgto());
+        lblOrigem.setText(getString(R.string.str_exc_saida) + mExcursao.getOrigem());
+        lblDestino.setText(getString(R.string.str_exc_destino) + mExcursao.getDestino());
+        lblDataHora.setText(getString(R.string.str_exc_datahora) + mExcursao.getData_hora());
+        lblResponsavel.setText(getString(R.string.str_exc_respons) + mExcursao.getResponsavel());
+        lblTelResp.setText(getString(R.string.str_exc_telrespons) + mExcursao.getTelefone_responsavel());
+        lblValor.setText(getString(R.string.str_exc_valor) + mExcursao.getValor());
+        lblForma.setText(getString(R.string.str_exc_formapgto) + mExcursao.getForma_pgto());
         return view;
     }
 }

@@ -11,8 +11,8 @@ import br.com.egcservices.portaldamoda.utils.listeners.ClickLojaListener;
 
 public class ListaLojasActivity extends ActionBarActivity implements ClickLojaListener {
 
-    private static String cidadeId, tipoEmpresa, descEmpresa;
-    private static CategoriaLoja mCat;
+    private static String cidadeId, tipoEmpresa, descEmpresa, mCatId;
+    //private static CategoriaLoja mCat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,8 @@ public class ListaLojasActivity extends ActionBarActivity implements ClickLojaLi
         setContentView(R.layout.activity_lista_lojas);
         validarIntent();
         getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new ListaLojasFragment(mCat, cidadeId, tipoEmpresa, descEmpresa)).commit();
+                .replace(android.R.id.content, new ListaLojasFragment()).commit();
+        //mCat, cidadeId, tipoEmpresa, descEmpresa)).commit();
     }
 
     public void validarIntent() {
@@ -30,7 +31,8 @@ public class ListaLojasActivity extends ActionBarActivity implements ClickLojaLi
             cidadeId = it.getStringExtra("cidade");
             tipoEmpresa = it.getStringExtra("tipoempresa");
             descEmpresa = it.getStringExtra("descempresa");
-            mCat = (CategoriaLoja) it.getSerializableExtra("categoria");
+            mCatId = it.getStringExtra("categoria");
+            //mCat = (CategoriaLoja) it.getSerializableExtra("categoria");
         }
     }
 
@@ -42,7 +44,7 @@ public class ListaLojasActivity extends ActionBarActivity implements ClickLojaLi
     @Override
     public void lojaClick(Empresa empresa) {
         validarIntent();
-        Intent it2 = new Intent(this, br.com.egcservices.portaldamoda.telas.lojas.DetailLojaActivity.class);
+        Intent it2 = new Intent(this, DetailLojaActivity.class);
         it2.putExtra("empresa", empresa);
         startActivity(it2);
     }

@@ -1,7 +1,6 @@
 package br.com.egcservices.portaldamoda.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,13 +32,20 @@ public class EmpresasAdapter extends ArrayAdapter<Empresa> {
 
         mLblNomeEmpresa = (TextView) convertView.findViewById(R.id.lblNomeEmpresa);
         mLblNomeEmpresa.setText(mEmpresa.getNome_empresa());
-        if (mEmpresa.getPlano_empresa_id().equals(2)) {
-            convertView.setBackgroundColor(Color.rgb(211, 211, 211));
-        } else if (mEmpresa.getPlano_empresa_id().equals(3)) {
-            convertView.setBackgroundColor(Color.rgb(255, 215, 0));
-        } else {
-            convertView.setBackgroundColor(Color.rgb(248, 248, 255));
+
+        int color;
+        switch (mEmpresa.getPlano_empresa_id()) {
+            case 2:
+                color = getContext().getResources().getColor(R.color.colorPlanoPremium);
+                break;
+            case 3:
+                color = getContext().getResources().getColor(R.color.colorPlanoGold);
+                break;
+            default:
+                color = getContext().getResources().getColor(R.color.colorPlanoFree);
+                break;
         }
+        convertView.setBackgroundColor(color);
         return convertView;
     }
 }

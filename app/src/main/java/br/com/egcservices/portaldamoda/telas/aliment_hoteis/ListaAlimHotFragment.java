@@ -4,7 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -13,26 +13,31 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.egcservices.portaldamoda.R;
 import br.com.egcservices.portaldamoda.adapters.EmpresasAdapter;
 import br.com.egcservices.portaldamoda.classes.Empresa;
-import br.com.egcservices.portaldamoda.utils.listeners.ClickListener;
 import br.com.egcservices.portaldamoda.utils.ConexaoHttp;
 import br.com.egcservices.portaldamoda.utils.Mensagem;
+import br.com.egcservices.portaldamoda.utils.listeners.ClickListener;
 
-public class ListaAlimHotFragment extends ListFragment implements SearchView.OnQueryTextListener {
+public class ListaAlimHotFragment extends Fragment implements SearchView.OnQueryTextListener {
 
+    private static final String EXTRA_EMPS = "empresas";
+    private static final String EXTRA_QUERY_EMP = "empresasQuery";
     TextView lblTipoEmp;
     ConexaoHttp conexaoHttp = new ConexaoHttp();
     ProgressDialog pDialog;
     MenuItem mMenuItemSearch;
     SearchView mSearchView;
+    ListView listView;
     int queryId = 0;
 
     private static String cidadeId, tipoEmpresa, descEmpresa;
@@ -43,22 +48,52 @@ public class ListaAlimHotFragment extends ListFragment implements SearchView.OnQ
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        Intent it = getActivity().getIntent();
-        if (it.hasExtra("cidade") && it.hasExtra("tipoempresa") && it.hasExtra("descempresa")) {
-            cidadeId = it.getStringExtra("cidade");
-            tipoEmpresa = it.getStringExtra("tipoempresa");
-            descEmpresa = it.getStringExtra("descempresa");
-        }
-        iniciarDownload(cidadeId, tipoEmpresa);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lista_empresas, container, false);
+        listView = (ListView) view.findViewById(R.id.empresas_list);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (getActivity() instanceof ClickListener) {
+                    if (queryId == 0)
+                        ((ClickListener) getActivity()).empresaClick(mListaEmpresas.get(position));
+                    else
+                        ((ClickListener) getActivity()).empresaClick(mListaQuery.get(position));
+                }
+            }
+        });
+
+        if (savedInstanceState != null) {
+            if (queryId == 0)
+                mListaEmpresas = (List<Empresa>) savedInstanceState.getSerializable(EXTRA_EMPS);
+            else
+                mListaQuery = (List<Empresa>) savedInstanceState.getSerializable(EXTRA_QUERY_EMP);
+        } else {
+            Intent it = getActivity().getIntent();
+            if (it.hasExtra("cidade") && it.hasExtra("tipoempresa") && it.hasExtra("descempresa")) {
+                cidadeId = it.getStringExtra("cidade");
+                tipoEmpresa = it.getStringExtra("tipoempresa");
+                descEmpresa = it.getStringExtra("descempresa");
+            }
+            iniciarDownload(cidadeId, tipoEmpresa);
+        }
+
         lblTipoEmp = (TextView) view.findViewById(R.id.lblTipoEmp);
         lblTipoEmp.setText(descEmpresa);
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (queryId == 0)
+            outState.putSerializable(EXTRA_EMPS, (Serializable) mListaEmpresas);
+        else
+            outState.putSerializable(EXTRA_QUERY_EMP, (Serializable) mListaQuery);
     }
 
     @Override
@@ -110,17 +145,6 @@ public class ListaAlimHotFragment extends ListFragment implements SearchView.OnQ
         return true;
     }
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        if (getActivity() instanceof ClickListener) {
-            if (queryId == 0)
-                ((ClickListener) getActivity()).empresaClick(mListaEmpresas.get(position));
-            else
-                ((ClickListener) getActivity()).empresaClick(mListaQuery.get(position));
-        }
-    }
-
     public void iniciarDownload(String id, String tipo) {
         if (conexaoHttp.temConexao(getActivity()))
             new ListarEmpresasPorTipoTask().execute(id, tipo);
@@ -131,7 +155,7 @@ public class ListaAlimHotFragment extends ListFragment implements SearchView.OnQ
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Carregando...");
+            pDialog.setMessage(getString(R.string.str_carregando));
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -159,6 +183,7 @@ public class ListaAlimHotFragment extends ListFragment implements SearchView.OnQ
     }
 
     public void refreshList(List<Empresa> lista) {
-        setListAdapter(new EmpresasAdapter(getActivity(), lista));
+        listView.setAdapter(new EmpresasAdapter(getActivity(), lista));
+        //setListAdapter(new EmpresasAdapter(getActivity(), lista));
     }
 }

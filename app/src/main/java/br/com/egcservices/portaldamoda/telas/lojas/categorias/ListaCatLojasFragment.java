@@ -12,16 +12,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.egcservices.portaldamoda.R;
 import br.com.egcservices.portaldamoda.classes.CategoriaLoja;
-import br.com.egcservices.portaldamoda.utils.listeners.ClickLojaListener;
 import br.com.egcservices.portaldamoda.utils.ConexaoHttp;
+import br.com.egcservices.portaldamoda.utils.listeners.ClickLojaListener;
 
 public class ListaCatLojasFragment extends ListFragment {
 
+    private static final String EXTRA_CAT = "categorias";
     TextView lblTipoEmp;
     ConexaoHttp conexaoHttp = new ConexaoHttp();
 
@@ -31,37 +33,38 @@ public class ListaCatLojasFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent it = getActivity().getIntent();
-        if (it.hasExtra("cidade") && it.hasExtra("tipoempresa")
-                && it.hasExtra("descempresa") && it.hasExtra("categoria")) {
-            cidadeId = it.getStringExtra("cidade");
-            tipoEmpresa = it.getStringExtra("tipoempresa");
-            descEmpresa = it.getStringExtra("descempresa");
-            categoriaId = it.getStringExtra("categoria");
-        }
-        iniciarDownload();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_lista_catlojas, container, false);
+        View v = inflater.inflate(R.layout.fragment_lista_catlojas, container, false);
 
-//        actCategorias = (AutoCompleteTextView) view.findViewById(R.id.actCategorias);
-        lblTipoEmp = (TextView) view.findViewById(R.id.lblTipoEmpCatLoja);
-        lblTipoEmp.setText(descEmpresa);
-//        actCategorias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @SuppressLint("LongLogTag")
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                String nomeCat = parent.getItemAtPosition(position).toString();
-//                if (getActivity() instanceof ClickLojaListener) {
-//                    ((ClickLojaListener) getActivity())
-//                            .catLojaClick(validarClick(true, nomeCat, mListaCats));
-//                }
-//            }
-//        });
-        return view;
+        if (savedInstanceState != null) {
+            mListaCats = (List<CategoriaLoja>) savedInstanceState.getSerializable(EXTRA_CAT);
+        } else {
+            Intent it = getActivity().getIntent();
+            if (it.hasExtra("cidade") && it.hasExtra("tipoempresa")
+                    && it.hasExtra("descempresa") && it.hasExtra("categoria")) {
+                cidadeId = it.getStringExtra("cidade");
+                tipoEmpresa = it.getStringExtra("tipoempresa");
+                descEmpresa = it.getStringExtra("descempresa");
+                categoriaId = it.getStringExtra("categoria");
+            }
+            iniciarDownload();
+        }
+        return v;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(EXTRA_CAT, (Serializable) mListaCats);
+    }
+
+    public void iniciarDownload() {
+        if (conexaoHttp.temConexao(getActivity()))
+            new ListarCategorias().execute();
     }
 
     @Override
@@ -70,11 +73,6 @@ public class ListaCatLojasFragment extends ListFragment {
         if (getActivity() instanceof ClickLojaListener) {
             ((ClickLojaListener) getActivity()).catLojaClick(mListaCats.get(position));
         }
-    }
-
-    public void iniciarDownload() {
-        if (conexaoHttp.temConexao(getActivity()))
-            new ListarCategorias().execute();
     }
 
     class ListarCategorias extends AsyncTask<String, Void, List<CategoriaLoja>> {
@@ -105,24 +103,9 @@ public class ListaCatLojasFragment extends ListFragment {
 
     public void refreshList() {
         List<String> emps = new ArrayList<>();
-//        //atualizar autocompletetextview
         for (int i = 0; i < mListaCats.size(); i++) {
             emps.add(mListaCats.get(i).getCategoria_desc());
         }
         setListAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, emps));
-//        actCategorias.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, emps));
-    }
-
-    public CategoriaLoja validarClick(boolean flag, String cat, List<CategoriaLoja> lista) {
-        CategoriaLoja mCatResult;
-        if (flag) {
-            for (int i = 0; i < lista.size(); i++) {
-                mCatResult = lista.get(i);
-                if (mCatResult.getCategoria_desc().equals(cat)) {
-                    return mCatResult;
-                }
-            }
-        }
-        return null;
     }
 }

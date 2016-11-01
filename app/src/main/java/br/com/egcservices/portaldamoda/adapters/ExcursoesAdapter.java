@@ -30,8 +30,8 @@ public class ExcursoesAdapter extends ArrayAdapter<Excursao> {
         }
         mLblOrigem = (TextView) convertView.findViewById(R.id.lblExcOrigem);
         mLblDestino = (TextView) convertView.findViewById(R.id.lblExcDestino);
-        mLblOrigem.setText("Origem: " + mExcursao.getOrigem());
-        mLblDestino.setText("Destino: " + mExcursao.getDestino());
+        mLblOrigem.setText(getContext().getString(R.string.str_exc_origem) + mExcursao.getOrigem());
+        mLblDestino.setText(getContext().getString(R.string.str_exc_destino) + mExcursao.getDestino());
         return convertView;
     }
 }

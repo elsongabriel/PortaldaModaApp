@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Portal da Moda App</string>
+    <string name="app_name">Portal da Moda</string>
 
     <string name="str_infocidade">Selecione uma cidade que deseja realizar consultas.</string>
     <string name="str_caruaru">Caruaru</string>
@@ -15,11 +15,26 @@
 
     <string name="btn_ligar">Ligar</string>
 
-
     <string name="hint_search">Procurar</string>
     <string name="hint_fav">Favoritar</string>
     <string name="hint_desfav">Desfavoritar</string>
 
     <string name="str_naoencontrado">Não encontramos o que você procura!</string>
+    <string name="str_carregando">Carregando...</string>
+
+    <string name="str_exc_saida">Saída: &#160;</string>
+    <string name="str_exc_origem">Origem:&#160; </string>
+    <string name="str_exc_destino">Destino:&#160; </string>
+    <string name="str_exc_datahora">Data e Hora:&#160; </string>
+    <string name="str_exc_respons">Responsável:&#160; </string>
+    <string name="str_exc_telrespons">Tel. Responsável:&#160; </string>
+    <string name="str_exc_valor">Valor: R$</string>
+    <string name="str_exc_formapgto">Formas de pagamento:&#160; </string>
+
+    <string name="str_fav_add">Adicionar aos Favoritos</string>
+    <string name="str_fav_del">Remover dos Favoritos</string>
+
+    <string name="str_fav_adicionado">Adicionado aos Favoritos</string>
+    <string name="str_fav_removido">Removido dos Favoritos</string>
 
 </resources>

@@ -1,10 +1,13 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    tools:context="br.com.egcservices.portaldamoda.HomeActivity">
     <!--android:background="#d39441"-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -22,55 +25,155 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </RelativeLayout>
 
-
-        <Button
-            android:id="@+id/btnFavoritos"
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardFavs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="130dp"
-            android:text="@string/str_favoritos" />
+            android:layout_marginTop="70dp"
+            android:onClick="favoritos"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="7dp">
 
-        <Button
-            android:id="@+id/btnAliment"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/btnFavoritos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/str_favoritos"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textStyle="normal|bold" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardAlim"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnFavoritos"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="@string/str_alimentacao" />
+            android:layout_marginTop="10dp"
+            android:onClick="alimentacao"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="7dp">
 
-        <Button
-            android:id="@+id/btnExcursao"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/btnAliment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/str_alimentacao"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textStyle="normal|bold" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardExc"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnAliment"
-            android:layout_centerHorizontal="true"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="@string/str_excursoes" />
+            android:layout_marginTop="10dp"
+            android:onClick="excursao"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="7dp">
 
-        <Button
-            android:id="@+id/btnHotel"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/btnExcursao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/str_excursoes"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textStyle="normal|bold" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardHoteis"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnExcursao"
-            android:layout_centerHorizontal="true"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="@string/str_hoteis" />
+            android:layout_marginTop="10dp"
+            android:onClick="hotel"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="7dp">
 
-        <Button
-            android:id="@+id/btnLoja"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/btnHotel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/str_hoteis"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textStyle="normal|bold" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardLoja"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnHotel"
-            android:layout_centerHorizontal="true"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="@string/str_lojas" />
+            android:layout_marginTop="10dp"
+            android:onClick="loja"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="7dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/btnLoja"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/str_lojas"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textStyle="normal|bold" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:orientation="vertical" />
 
     </LinearLayout>
 </ScrollView>
